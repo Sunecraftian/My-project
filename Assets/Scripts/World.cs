@@ -176,7 +176,6 @@ public class World : MonoBehaviour {
                     }
                 }
             } 
-            CreateMesh();
         }
 
         bool CheckNeighbor(Vector3 pos) { 
