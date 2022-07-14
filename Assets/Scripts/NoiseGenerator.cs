@@ -5,7 +5,7 @@ using UnityEngine;
 public static class NoiseGenerator {
 
     public static float OGet2DPerlin(Vector2 position, float offset, float scale) {
-        return Mathf.PerlinNoise((position.x + 0.1f) / World.Chunk.chunkSize * scale + offset, (position.y + 0.1f) / World.Chunk.chunkSize * scale + offset);
+        return Mathf.PerlinNoise((position.x + 0.1f) / VoxelData.chunkSize * scale + offset, (position.y + 0.1f) / VoxelData.chunkSize * scale + offset);
     }
 
 

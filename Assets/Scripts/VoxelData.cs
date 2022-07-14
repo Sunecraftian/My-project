@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public static class VoxelData {
+    public static readonly int worldSize = 2;
+    public static readonly int chunkSize = 1;
+    public static readonly int chunkHeight = 4;
+    public static int worldSizeInVoxels { get { return worldSize * chunkSize; } }
+
 
     public static readonly int AtlasSize = 4;
     public static float normalizedAtlasSize { get { return 1f / (float)AtlasSize; } }
