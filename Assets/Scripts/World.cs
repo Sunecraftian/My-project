@@ -52,60 +52,60 @@ public class World : MonoBehaviour {
         // Debug.Log(temp1[0,3,0] + " " + temp2[0,3,0]);
     }
 
-    // public byte GetVoxel(Vector3 pos) {
-    //     int y = Mathf.FloorToInt(pos.y);
-    //     int max = VoxelData.chunkHeight/2;
-    //     int baseline = max/2;
-    //     float noise = Mathf.PerlinNoise(pos.x * scale + offset, pos.y * scale + offset);
-    //     int height = (int)((max * noise) + baseline);
-        
-    //     Debug.Log(System.String.Join(", ", new string[]{y.ToString(), noise.ToString(), height.ToString()}));
-
-    //     if (!IsVoxelInWorld(pos)) return (byte) BlockTypes.AIR; // If Voxel is NOT in world
-    //     if (y == 0) return (byte) BlockTypes.BEDROCK;
-
-    //     if (y > height) return (byte) BlockTypes.AIR;
-    //     else if (y == height) return (byte) BlockTypes.GRASS;
-
-        
-    //     return (byte) BlockTypes.DIRT;
-        
-            
-    // }
-
     public byte GetVoxel(Vector3 pos) {
         int y = Mathf.FloorToInt(pos.y);
+        int max = VoxelData.chunkHeight/2;
+        int baseline = max/2;
+        float noise = Mathf.PerlinNoise(pos.x * scale + offset, pos.y * scale + offset);
+        int height = (int)((max * noise) + baseline);
         
+        Debug.Log(System.String.Join(", ", new string[]{y.ToString(), noise.ToString(), height.ToString()}));
+
         if (!IsVoxelInWorld(pos)) return (byte) BlockTypes.AIR; // If Voxel is NOT in world
         if (y == 0) return (byte) BlockTypes.BEDROCK;
+
+        if (y > height) return (byte) BlockTypes.AIR;
+        else if (y == height) return (byte) BlockTypes.GRASS;
+
         
+        return (byte) BlockTypes.DIRT;
         
-        
-
-        int terrainHeight = Mathf.FloorToInt(NoiseGenerator.OGet2DPerlin(new Vector2(pos.x, pos.z), offset, scale) * VoxelData.chunkHeight);
-
-        // if (y == 3) Debug.Log("is 3: " + pos);
-        // Debug.Log(Chunk.voxelMap.Length);
-
-
-        if (y == terrainHeight) 
-            return 4;
-        else if (y > terrainHeight)
-            return 0;
-        else {
-            return 0; 
-        }    
-
-        // if (y == terrainHeight) 
-        //     return (byte) BlockTypes.DIRT;
-        // else if (y > terrainHeight) 
-        //     return (byte) BlockTypes.AIR;
-        // else if (y < terrainHeight)
-        //     return (byte) BlockTypes.STONE;
-        // else 
-        //     return (byte) BlockTypes.GRASS;
             
     }
+
+    // public byte GetVoxel(Vector3 pos) {
+    //     int y = Mathf.FloorToInt(pos.y);
+        
+    //     if (!IsVoxelInWorld(pos)) return (byte) BlockTypes.AIR; // If Voxel is NOT in world
+    //     if (y == 0) return (byte) BlockTypes.BEDROCK;
+        
+        
+        
+
+    //     int terrainHeight = Mathf.FloorToInt(NoiseGenerator.OGet2DPerlin(new Vector2(pos.x, pos.z), offset, scale) * VoxelData.chunkHeight);
+
+    //     // if (y == 3) Debug.Log("is 3: " + pos);
+    //     // Debug.Log(Chunk.voxelMap.Length);
+
+
+    //     if (y == terrainHeight) 
+    //         return 4;
+    //     else if (y > terrainHeight)
+    //         return 0;
+    //     else {
+    //         return 0; 
+    //     }    
+
+    //     // if (y == terrainHeight) 
+    //     //     return (byte) BlockTypes.DIRT;
+    //     // else if (y > terrainHeight) 
+    //     //     return (byte) BlockTypes.AIR;
+    //     // else if (y < terrainHeight)
+    //     //     return (byte) BlockTypes.STONE;
+    //     // else 
+    //     //     return (byte) BlockTypes.GRASS;
+            
+    // }
 
 
     public bool IsVoxelInWorld(Vector3 pos) {

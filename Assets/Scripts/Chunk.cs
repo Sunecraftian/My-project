@@ -57,7 +57,9 @@ public class Chunk{
         for (int y = 0; y < VoxelData.chunkHeight; y++) {
             for (int x = 0; x < VoxelData.chunkSize; x++) {
                 for (int z = 0; z < VoxelData.chunkSize; z++) {
-                    GenerateVoxel(new Vector3(x, y, z));
+                    if (Block.blocks[blockMap[x, y, z]].exists) {
+                        GenerateVoxel(new Vector3(x, y, z));
+                    }
                 } 
             }
         }
