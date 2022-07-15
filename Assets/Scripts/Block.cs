@@ -18,10 +18,10 @@ public class Block {
 
     public static void LoadBlocks() {
         blocks[0] = new Block("Air", (byte) BlockTypes.AIR, false).SetTextureData(new byte[] { 0, 0, 0, 0, 0, 0 });
-        blocks[1] = new Block("Bedrock", (byte) BlockTypes.BEDROCK, true).SetTextureData(new byte[] { 12, 12, 12, 12, 12, 12 });
-        blocks[2] = new Block("Dirt", (byte) BlockTypes.DIRT, true).SetTextureData(new byte[] { 2, 2, 2, 2, 2, 2 });
-        blocks[3] = new Block("Grass", (byte) BlockTypes.GRASS, true).SetTextureData(new byte[] { 3, 3, 2, 4, 3, 3 });
-        blocks[4] = new Block("Stone", (byte) BlockTypes.STONE, true).SetTextureData(new byte[] { 1, 1, 1, 1, 1, 1 });
+        blocks[1] = new Block("Bedrock", (byte) BlockTypes.BEDROCK, true).SetTextureData(new byte[] { 11, 11, 11, 11, 11, 11 });
+        blocks[2] = new Block("Dirt", (byte) BlockTypes.DIRT, true).SetTextureData(new byte[] { 1, 1, 1, 1, 1, 1 });
+        blocks[3] = new Block("Grass", (byte) BlockTypes.GRASS, true).SetTextureData(new byte[] { 2, 2, 1, 3, 2, 2 });
+        blocks[4] = new Block("Stone", (byte) BlockTypes.STONE, true).SetTextureData(new byte[] { 2, 2, 2, 2, 2, 2 });
         
         
         

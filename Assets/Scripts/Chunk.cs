@@ -143,7 +143,7 @@ public static class VoxelData {
     public static int worldSizeInVoxels { get { return worldSize * chunkSize; } }
 
 
-    public static readonly int AtlasSize = 8;
+    public static readonly int AtlasSize = 4;
     public static float normalizedAtlasSize { get { return 1f / (float)AtlasSize; } }
 
     public static readonly Vector3[] voxelVertices = new Vector3[8] {
