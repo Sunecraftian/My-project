@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class World : MonoBehaviour {
-
-
-
     public Material material;
-    
+    public bool autoUpdate;
+
 
     // public int seed;
     public float scale;
@@ -18,7 +16,6 @@ public class World : MonoBehaviour {
     // public float lacunarity;
     public float offset;
 
-    public bool autoUpdate;
 
     public static Chunk[,] chunks = new Chunk[VoxelData.worldSize, VoxelData.worldSize];
 
@@ -32,15 +29,14 @@ public class World : MonoBehaviour {
 
 
     public void GenerateWorld() {
-        BlockManager.LoadBlockData();
-        TextureManager.LoadTextureData();
+        Block.LoadBlocks();
 
         this.transform.position = new Vector3(0, 0, 0);
 
         for (int x = 0; x < VoxelData.worldSize; x++) {
             for (int z = 0; z < VoxelData.worldSize; z++) {
-                chunks[x, z] = new Chunk(this, x, z);
-
+                chunks[x, z] = new Chunk(this, new Vector2(x,z));
+                // Debug.Log(Mathf.PerlinNoise(x*scale+offset,z*scale+offset));
             } 
         }
 
@@ -58,35 +54,22 @@ public class World : MonoBehaviour {
 
     public byte GetVoxel(Vector3 pos) {
         int y = Mathf.FloorToInt(pos.y);
+        int max = VoxelData.chunkHeight/2;
+        int baseline = max/2;
+        float noise = Mathf.PerlinNoise(pos.x * scale + offset, pos.y * scale + offset);
+        int height = (int)((max * noise) + baseline);
         
+        Debug.Log(System.String.Join(", ", new string[]{y.ToString(), noise.ToString(), height.ToString()}));
+
         if (!IsVoxelInWorld(pos)) return (byte) BlockTypes.AIR; // If Voxel is NOT in world
         if (y == 0) return (byte) BlockTypes.BEDROCK;
+
+        if (y > height) return (byte) BlockTypes.AIR;
+        else if (y == height) return (byte) BlockTypes.GRASS;
+
         
+        return (byte) BlockTypes.DIRT;
         
-        
-
-        int terrainHeight = Mathf.FloorToInt(NoiseGenerator.OGet2DPerlin(new Vector2(pos.x, pos.z), offset, scale) * VoxelData.chunkHeight);
-
-        // if (y == 3) Debug.Log("is 3: " + pos);
-        // Debug.Log(Chunk.voxelMap.Length);
-
-
-        if (y == terrainHeight) 
-            return 4;
-        else if (y > terrainHeight)
-            return 0;
-        else {
-            return 0; 
-        }    
-
-        // if (y == terrainHeight) 
-        //     return (byte) BlockTypes.DIRT;
-        // else if (y > terrainHeight) 
-        //     return (byte) BlockTypes.AIR;
-        // else if (y < terrainHeight)
-        //     return (byte) BlockTypes.STONE;
-        // else 
-        //     return (byte) BlockTypes.GRASS;
             
     }
 
