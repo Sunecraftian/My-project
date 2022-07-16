@@ -59,7 +59,9 @@ public class World : MonoBehaviour {
         float noise = Mathf.PerlinNoise(pos.x * scale + offset, pos.y * scale + offset);
         int height = (int)((max * noise) + baseline);
         
-        Debug.Log(System.String.Join(", ", new string[]{y.ToString(), noise.ToString(), height.ToString()}));
+        // Debug.Log(System.String.Join(", ", new string[]{y.ToString(), noise.ToString(), height.ToString()}));
+
+        height = Mathf.FloorToInt(NoiseGenerator.OGet2DPerlin(new Vector2(pos.x, pos.z), offset, scale) * VoxelData.chunkHeight);
 
         if (!IsVoxelInWorld(pos)) return (byte) BlockTypes.AIR; // If Voxel is NOT in world
         if (y == 0) return (byte) BlockTypes.BEDROCK;

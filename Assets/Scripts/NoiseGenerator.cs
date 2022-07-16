@@ -8,6 +8,10 @@ public static class NoiseGenerator {
         return Mathf.PerlinNoise((position.x + 0.1f) / VoxelData.chunkSize * scale + offset, (position.y + 0.1f) / VoxelData.chunkSize * scale + offset);
     }
 
+    public static float GenerateNoise(Vector2 position, int seed, float scale, float offset) {
+    
+    }
+
 
     // public static float Get2DPerlin(Vector2 position, int seed, float scale, int octaves, float persistence, float lacunarity, float offset) {
     //     return Mathf.PerlinNoise((position.x + 0.1f) / scale * lacunarity + offset, (position.y + 0.1f) / scale * lacunarity + offset) * persistence;

@@ -9,6 +9,7 @@ public class Chunk{
     GameObject chunk;
     MeshRenderer renderer;
     MeshFilter filter;
+    MeshCollider collider;
     
     List<Vector3> vertices = new List<Vector3>();
     List<int> triangles = new List<int>();
@@ -25,11 +26,13 @@ public class Chunk{
         chunk = new GameObject("Chunk " + pos.x + ", " + pos.y);
         renderer = chunk.AddComponent<MeshRenderer>();
         filter = chunk.AddComponent<MeshFilter>();
+        collider = chunk.AddComponent<MeshCollider>();
+
         renderer.material = world.material;
+        collider.sharedMesh = filter.sharedMesh;
 
         chunk.transform.SetParent(world.transform);
         chunk.transform.position = chunkPos + new Vector3(pos.x * VoxelData.chunkSize, 0, pos.y * VoxelData.chunkSize); ;
-
 
         FillBlockMap();
         GenerateChunk();
@@ -139,9 +142,9 @@ public class Chunk{
 }
 
 public static class VoxelData {
-    public static readonly int worldSize = 2;
-    public static readonly int chunkSize = 3;
-    public static readonly int chunkHeight = 10;
+    public static readonly int worldSize = 3;
+    public static readonly int chunkSize = 20;
+    public static readonly int chunkHeight = 20;
     public static int worldSizeInVoxels { get { return worldSize * chunkSize; } }
 
 
